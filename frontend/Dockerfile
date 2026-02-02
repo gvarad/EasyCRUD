@@ -11,7 +11,7 @@ RUN cd frontend && npm install
 COPY . /usr/local/apache2/htdocs
 
 # Build React app
-RUN cd frontend && npm run build
+RUN cd ../  && npm run build
 
 
 # -------- Stage 2: Apache --------
