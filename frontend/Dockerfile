@@ -8,7 +8,7 @@ COPY frontend/package*.json ./frontend/
 RUN cd frontend && npm install
 
 # Copy frontend source
-COPY frontend ./frontend
+COPY frontend ./
 
 # Build React app
 RUN cd frontend && npm run build
