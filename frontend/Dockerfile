@@ -5,7 +5,7 @@ WORKDIR /app
 
 # Copy frontend package files
 # COPY frontend/package*.json ./frontend/
-RUN cd frontend && npm install
+RUN  npm install
 
 # Copy frontend source
 COPY . /usr/local/apache2/htdocs
