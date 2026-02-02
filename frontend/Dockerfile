@@ -1,23 +1,28 @@
 # -------- Stage 1: Build React App --------
-FROM node:18-alpine AS build
+FROM node:18-alpine AS build && ubuntu:latest
 
-WORKDIR /app
+WORKDIR /frontend
 
 # Copy frontend package files
 # COPY frontend/package*.json ./frontend/
-RUN  npm install
+RUN  apt-get update && \
+     apt-get install nodejs npm -y && \
+     npm install && npm run build
+     
 
 # Copy frontend source
-COPY . /usr/local/apache2/htdocs
+#COPY . /usr/local/apache2/htdocs
 
 # Build React app
-RUN cd ../  && npm run build
+# RUN cd ../  && npm run build
 
 
 # -------- Stage 2: Apache --------
 FROM httpd:2.4
 
-RUN rm -rf /usr/local/apache2/htdocs/*
+RUN cd dist && \
+     apt-get install apache2 -y && \
+     cp -rf dist/* /var/www/html/
 
 # Correct path to React build output
 COPY --from=build /app/frontend/dist/ /usr/local/apache2/htdocs/
