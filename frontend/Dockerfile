@@ -4,7 +4,7 @@ FROM node:18-alpine AS build
 WORKDIR /app
 
 # Copy frontend package files
-COPY frontend/package*.json ./frontend/
+# COPY frontend/package*.json ./frontend/
 RUN cd frontend && npm install
 
 # Copy frontend source
