@@ -23,7 +23,7 @@ FROM httpd:2.4
 RUN rm -rf /usr/local/apache2/htdocs/*
 
 # Copy Vite build output to Apache web root
-COPY --from=build /app/frontend/dist/ /usr/local/apache2/htdocs/
+COPY --from=build /app/frontend/dist/* /var/www/html
 
 EXPOSE 80
 
