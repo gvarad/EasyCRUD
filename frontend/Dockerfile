@@ -20,7 +20,7 @@ FROM httpd:2.4
 RUN rm -rf /usr/local/apache2/htdocs/*
 
 # Correct path to React build output
-COPY --from=build /app/frontend/build/ /usr/local/apache2/htdocs/
+COPY --from=build /app/frontend/dist/ /usr/local/apache2/htdocs/
 
 EXPOSE 80
 CMD ["httpd-foreground"]
