@@ -1,25 +1,26 @@
-
 # -------- Stage 1: Build React App --------
 FROM node:18-alpine AS build
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+# Copy frontend package files
+COPY frontend/package*.json ./frontend/
+RUN cd frontend && npm install
 
-COPY . .
-RUN npm run build
+# Copy frontend source
+COPY frontend ./frontend
+
+# Build React app
+RUN cd frontend && npm run build
 
 
-# -------- Stage 2: Apache Web Server --------
+# -------- Stage 2: Apache --------
 FROM httpd:2.4
 
-# Remove default Apache html files
 RUN rm -rf /usr/local/apache2/htdocs/*
 
-# Copy React build files to Apache directory
-COPY --from=build /app/build/ /usr/local/apache2/htdocs/
+# Correct path to React build output
+COPY --from=build /app/frontend/build/ /usr/local/apache2/htdocs/
 
 EXPOSE 80
-
 CMD ["httpd-foreground"]
