@@ -6,7 +6,7 @@ RUN mvn clean package -DskipTests
 
 # Stage 2: Run the application (Using Amazon Corretto Slim)
 FROM amazoncorretto:17-alpine
-WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
+WORKDIR /EasyCRUD
+COPY --from=build /EasyCRUD/target/*.jar student-registration-backend-0.0.1-snapshot.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "student-registration-backend-0.0.1-snapshot.jar"]
