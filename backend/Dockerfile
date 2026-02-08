@@ -1,6 +1,6 @@
 # Stage 1: Build the application (Using Maven with Amazon Corretto)
 FROM maven:3.8.4-amazoncorretto-17 AS build
-WORKDIR /app
+WORKDIR /EasyCRUD
 COPY . .
 RUN mvn clean package -DskipTests
 
