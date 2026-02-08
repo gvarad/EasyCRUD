@@ -1,0 +1,20 @@
+  # Frontend: React Application
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    restart: always      
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - REACT_APP_API_URL=http://35.77.219.79:8080
+    depends_on:
+      - backend
+    networks:
+      - easycrud-net
+
+networks:
+  easycrud-net:
+    driver: bridge
